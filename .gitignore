@@ -11,3 +11,6 @@ crash.log
 crash.*.log
 
 *.pem
+
+### Ansible ###
+*.retry
