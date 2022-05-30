@@ -18,7 +18,13 @@ resource "aws_instance" "app_server" {
   ami           = "ami-09d56f8956ab235b3"
   instance_type = "t2.micro"
   key_name = "iac-access"
+  user_data = <<-EOF
+                 #!/bin/bash
+                 cd /home/ubuntu
+                 echo "<h1>Done with Terraform  by Jean Queiroz</h1>" > index.html 
+                 nohup busybox httpd -f -p 8080 &
+                 EOF
   tags = {
-    Name = "First Instance"
+    Name = "Test Instance-01"
   }
 }
