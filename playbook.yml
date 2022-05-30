@@ -9,7 +9,15 @@
       become: yes
     - name: Install dependency with pip (Django and Django Rest)    
       pip: 
-        virtualenv: /home/ubuntu/venv
+        virtualenv: /home/ubuntu/jcqueiroz/venv
         name: 
           - django
           - djangorestframework
+    - name: Starting project
+      shell: '. /home/ubuntu/jcqueiroz/venv/bin/activate; django-admin startproject setup /home/ubuntu/jcqueiroz/'      
+    - name: Change the settings host 
+      lineinfile: 
+        path: /home/ubuntu/jcqueiroz/setup/settings.py
+        regexp: 'ALLOWED_HOSTS'
+        line: 'ALLOWED_HOSTS = ["*"] '
+        backrefs: yes  
